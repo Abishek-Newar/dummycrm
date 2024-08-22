@@ -11,10 +11,10 @@ const Provider = ({children}: {children: ReactNode}) => {
 export const moduleState = atom({
     key: 'moduleState',
     default: {
-      title: "Enter your title",
-      description: "Enter your description",
+      title: "",
+      description: "",
       modules: [{
-          title: "",
+          title: "Chapter",
           description: "",
           lesson: []
       }]

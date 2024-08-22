@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import DialogContents from './ui/DialogContents'
 import DailogPreview from './DailogPreview'
+import { Button } from './ui/button'
 
 const DialogBox = ({index}: {index:number}) => {
 
@@ -16,7 +17,9 @@ const DialogBox = ({index}: {index:number}) => {
     return (
         <div >
             <Dialog>
-                <DialogTrigger>ADD LESSON</DialogTrigger>
+                <DialogTrigger className='w-full'>
+                    <Button className='w-full'>ADD LESSON</Button>
+                </DialogTrigger>
                 
                 <DialogContent className='w-[80vw]'>
                 <DialogTitle>ADD A LESSON</DialogTitle>

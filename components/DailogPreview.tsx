@@ -1,21 +1,21 @@
 "use client"
-
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useEffect, useState } from "react";
 import DialogContents from "./ui/DialogContents"
 import { useRecoilState } from "recoil";
 import { moduleState, videoState } from "./Provider";
 import MarkdownIt from "markdown-it";
 import { Button } from "./ui/button";
+import { FaFileDownload } from "react-icons/fa";
 const md = new MarkdownIt();
 const DailogPreview = ({Index}: {Index:number}) => {
   const [video, setVideo] = useState("")
   const [videoBuffer, setVideoBuffer] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [title,setTitle] = useState("")
+  const [title,setTitle] = useState("Chapter")
   const [description,setDescription] = useState("")
-  const [file,setFile] = useState(null)
+  const [file,setFile] = useState("")
   const [module,setModule] = useRecoilState(moduleState)
-
   function ButtonClick(Index:number) {
     console.log(Index)
     setModule((prevModule:any) => ({
@@ -69,23 +69,39 @@ const DailogPreview = ({Index}: {Index:number}) => {
   const handleFileUpload = (event: any) =>{
     const file = event.target.files[0];
     if(file){
-      setFile(file)
+      console.log(file)
+      const fileURL =  URL.createObjectURL(file)
+      console.log(fileURL)
+      setFile({
+        files: fileURL,
+        name: file.name
+      })
     }
   }
   
   return (
-    <div className='min-h-[70vh] min-w-screen flex '>      
+    <div className='min-h-[70vh] min-w-screen flex  '>      
       <DialogContents title={title} titleChanges={handleTitleChange} description = {description} setDescription={setDescription} video= {video} handleVideoUpload={handleVideoUpload} file={file} handleFileUpload={handleFileUpload}/>
-    <div className='min-h-full w-[25%] border'>
-        <div className='w-full h-[30%]'>
+    <div className='min-h-full w-[25%] border flex flex-col justify-between p-3'>
+        <div className="w-full h-full">
+        <div className='w-full h-auto'>
             <video src={video} controls></video>
         </div>
         <div>
-            <h1>Title: {title}</h1>
-            <h1>Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></h1>
-
+            <h4>Title: {title}</h4>
+            <p className="h-[400px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
         </div>
-        <Button onClick={()=>ButtonClick(Index)} variant="ghost">ADD</Button>
+        <div>
+          <p>support files</p>
+          <a className="w-32" href={file?.files} download={file.name}>
+          {file.name} {
+            file.name && <FaFileDownload />
+          }
+         </a>
+        </div>
+        
+        </div>
+        <DialogPrimitive.Close><Button onClick={()=>ButtonClick(Index)} variant="outline">ADD</Button></DialogPrimitive.Close>
     </div>
     </div>
   )

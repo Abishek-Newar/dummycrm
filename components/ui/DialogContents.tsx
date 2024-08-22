@@ -10,11 +10,11 @@ const DialogContents = ({title,titleChanges,description,setDescription,video,han
         <Input placeholder="title" onChange={titleChanges} />
         <MarkdownEditor placeholder='Enter Description' value={description} onChange={setDescription} />
         <label className='border' >
-          <h1>Video:</h1>
-          <Input type='file' onChange={handleVideoUpload} />
+          <h4>Video:</h4>
+          <Input className='border' type='file' onChange={handleVideoUpload} />
         </label>
         <label>
-          <h1>Support files</h1>
+          <h4>Support files</h4>
           <Input type='file' onChange={handleFileUpload} />
         </label>
       </div>

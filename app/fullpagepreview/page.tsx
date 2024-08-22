@@ -1,7 +1,13 @@
+"use client"
+
+import FullPagePreview from "@/components/FullPagePreview";
 
 
- const FullPage = () =>{
-    return <> hi there</>
+
+const FullPage = () =>{
+    return <>
+        <FullPagePreview />
+    </>
 }
 
 

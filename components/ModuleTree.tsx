@@ -19,13 +19,17 @@ const ModuleTree = () => {
             modules: [
                 ...prevModule.modules,
                 {
-                    title: "",
+                    title: "chapter",
                     description: "",
                     lesson: []
                 }
             ]
         }));
         setLoading(false)
+    }
+
+    function addTitle(event:any){
+        setModule({ ...module, title: event.target.value })
     }
     useEffect(() => {
         console.log(module)
@@ -37,7 +41,7 @@ const ModuleTree = () => {
             {loading ?
                 <h1>Loading...</h1> :
                 <>
-                    <Input placeholder='Title' onChange={(e) => { setModule({ ...module, title: e.target.value }) }} />
+                    <Input placeholder='Title' onChange={addTitle} />
                     <div className='w-full'>
                     <MarkdownEditor value={module.description} onChange={(value: any) => { setModule({ ...module, description: value }) }} placeholder="Enter Description" />
                     </div>
@@ -59,9 +63,9 @@ const ModuleTree = () => {
                                             </div>
                                         ))}
                                     </ul>
-                                    <Button className='w-full '>
-                                        <DialogBox index={index} />
-                                    </Button>
+                                    <div className='w-full'>
+                                    <DialogBox index={index} />
+                                    </div>
                                 </div>
                             ))
                     }
