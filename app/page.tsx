@@ -1,11 +1,15 @@
+import Index from "@/components/MarkdownEditor";
+import MArkdownPreview from "@/components/MarkdownPreview";
 import ModuleTree from "@/components/ModuleTree";
 import PreviewBar from "@/components/PreviewBar";
+import Provider from "@/components/Provider";
 import Sidebar from "@/components/ui/Sidebar";
 import Topbar from "@/components/ui/Topbar";
 
 export default function Home() {
   return (
-    <main  className="flex">
+   <Provider>
+     <main  className="flex">
       <Sidebar />
       <div className="w-full flex flex-col">
         <Topbar />
@@ -14,8 +18,8 @@ export default function Home() {
           <PreviewBar />
         </div>
       </div>
-      
     </main>
+   </Provider>
   );
 }
  

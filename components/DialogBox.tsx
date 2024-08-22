@@ -8,18 +8,17 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import DialogContents from './ui/DialogContents'
-import DailogPreview from './ui/DailogPreview'
+import DailogPreview from './DailogPreview'
 
-const DialogBox = () => {
+const DialogBox = ({index,titleChange,descriptionChange,videoChange,fileChange}: {index:number}) => {
     return (
-        <div>
+        <div >
             <Dialog>
                 <DialogTrigger>ADD LESSON</DialogTrigger>
+                
                 <DialogContent className='w-[80vw]'>
-                        <div className='min-h-[70vh] min-w-screen flex '>
-                            <DialogContents />
-                            <DailogPreview />
-                        </div>
+                <DialogTitle>ADD A LESSON</DialogTitle>
+                            <DailogPreview titleChange={titleChange} descriptionChange={descriptionChange} videoChange={videoChange} fileChange={fileChange} />
                 </DialogContent>
             </Dialog>
 

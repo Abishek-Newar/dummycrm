@@ -1,41 +1,30 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { Input } from './ui/input'
-import { Textarea } from './ui/textarea'
-import { Button } from './ui/button'
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-  } from "@/components/ui/dialog"
+import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
 import DialogBox from './DialogBox'
+import MarkdownEditor from './MarkdownEditor'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import { moduleState } from './Provider'
   
 const ModuleTree = () => {
     const [loading,setLoading] = useState(false)
-    const [module,setModule] = useState({
-        title: "Enter your title",
-        description: "Enter your description",
-        modules: [{
-            title: "",
-            description: "",
-            videoURl: "",
-            supportingFilesURl: ""
-        }]
-    })
+    const [module,setModule] = useRecoilState(moduleState)
 
-    function addModule(){
+    async function addModule(){
         setLoading(true)
-        let tempModule = module;
-        tempModule.modules.push({
-            title: "",
-            description: "",
-            videoURl: "",
-            supportingFilesURl: ""
-        })
-        setModule(tempModule)
+        setModule((prevModule) => ({
+            ...prevModule,
+            modules: [
+              ...prevModule.modules,
+              {
+                title: "",
+                description: "",
+                videoURl: "",
+                supportingFilesURl: ""
+              }
+            ]
+          }));
         setLoading(false)
     }
     useEffect(()=>{
@@ -43,8 +32,11 @@ const ModuleTree = () => {
     },[module])
   return (
     <div className='w-full flex flex-col items-center p-10 gap-10'>
-        <Input placeholder='Title' />
-        <Textarea placeholder='Enter Description' />
+        {loading? 
+        <h1>Loading...</h1>:
+        <>
+        <Input placeholder='Title'  onChange={(e)=>{setModule({...module,title:e.target.value})}}/>
+        <MarkdownEditor value={module.description} onChange={(value: any)=>{setModule({...module,description: value})}} placeholder="Enter Description"/>
         {
             loading?
             <h1>LOading...</h1>:
@@ -53,12 +45,13 @@ const ModuleTree = () => {
                     <div>Module {index+1} - {item.title}</div>
                     <div>{item.description}</div>
                     <Button className='w-full '> 
-                        <DialogBox />
+                        <DialogBox  index={index} />
                     </Button>
                 </div>
             ))
         }
-        <Button onClick={addModule} variant="outline"> + </Button>
+        <Button onClick={addModule} variant="outline"> + </Button></>
+      }
     </div>
   )
 }
