@@ -1,5 +1,3 @@
-import Index from "@/components/MarkdownEditor";
-import MArkdownPreview from "@/components/MarkdownPreview";
 import ModuleTree from "@/components/ModuleTree";
 import PreviewBar from "@/components/PreviewBar";
 import Provider from "@/components/Provider";
