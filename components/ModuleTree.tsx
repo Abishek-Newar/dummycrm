@@ -51,7 +51,7 @@ const ModuleTree = () => {
                                     </div>
                                     <ul>
                                         {item.lesson.map((item,index)=>(
-                                            <div>
+                                            <div key={index}>
                                                 {
                                                     //@ts-ignore
                                                     item.title && <li key={index}>{item.title}</li>
