@@ -1,10 +1,10 @@
 declare type DailogPros = {
     title: string,
-    titleChange: ()=>void,
+    titleChanges: (event:any)=>void,
     description: string,
-    setDescription: ()=>void,
+    setDescription: (event:any)=>void,
     video: string,
-    handleVideoUpload:()=>void,
+    handleVideoUpload:(event:any)=>void,
     file : any,
-    handleFileUpload: ()=>void
+    handleFileUpload: (event:any)=>void
 }

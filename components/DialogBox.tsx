@@ -10,7 +10,9 @@ import {
 import DialogContents from './ui/DialogContents'
 import DailogPreview from './DailogPreview'
 
-const DialogBox = ({index,titleChange,descriptionChange,videoChange,fileChange}: {index:number}) => {
+const DialogBox = ({index}: {index:number}) => {
+
+    
     return (
         <div >
             <Dialog>
@@ -18,7 +20,7 @@ const DialogBox = ({index,titleChange,descriptionChange,videoChange,fileChange}:
                 
                 <DialogContent className='w-[80vw]'>
                 <DialogTitle>ADD A LESSON</DialogTitle>
-                            <DailogPreview titleChange={titleChange} descriptionChange={descriptionChange} videoChange={videoChange} fileChange={fileChange} />
+                            <DailogPreview index={index} />
                 </DialogContent>
             </Dialog>
 
