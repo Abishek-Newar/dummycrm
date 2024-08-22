@@ -20,7 +20,7 @@ const DialogBox = ({index}: {index:number}) => {
                 
                 <DialogContent className='w-[80vw]'>
                 <DialogTitle>ADD A LESSON</DialogTitle>
-                            <DailogPreview index={index} />
+                            <DailogPreview Index={index} />
                 </DialogContent>
             </Dialog>
 

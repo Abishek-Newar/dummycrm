@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import DialogBox from './DialogBox'
 import MarkdownEditor from './MarkdownEditor'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
 import { moduleState } from './Provider'
+import { Button } from './ui/button'
+import EditableTitle from './ui/EditableTitle'
+import { Input } from './ui/input'
 
 const ModuleTree = () => {
     const [loading, setLoading] = useState(false)
@@ -20,12 +21,7 @@ const ModuleTree = () => {
                 {
                     title: "",
                     description: "",
-                    lesson: [{
-                        title: "",
-                        description: "",
-                        videoURl: "",
-                        supportingFilesURl: ""
-                    }]
+                    lesson: []
                 }
             ]
         }));
@@ -35,25 +31,32 @@ const ModuleTree = () => {
         console.log(module)
     }, [module])
 
-    function addLesson (){
-        
-    }
+   
     return (
         <div className='w-full flex flex-col items-center p-10 gap-10'>
             {loading ?
                 <h1>Loading...</h1> :
                 <>
                     <Input placeholder='Title' onChange={(e) => { setModule({ ...module, title: e.target.value }) }} />
+                    <div className='w-full'>
                     <MarkdownEditor value={module.description} onChange={(value: any) => { setModule({ ...module, description: value }) }} placeholder="Enter Description" />
+                    </div>
                     {
                         loading ?
                             <h1>LOading...</h1> :
                             module.modules.map((item, index) => (
                                 <div key={index} className='flex flex-col items-start border w-full p-7'>
-                                    <div>Module {index + 1} - {item.title}</div>
+                                    <div className='flex '><div>Module {index + 1} - </div>
+                                        <EditableTitle index={index} />
+                                    </div>
                                     <ul>
                                         {item.lesson.map((item,index)=>(
-                                            <li key={index}>{item.title}</li>
+                                            <div>
+                                                {
+                                                    //@ts-ignore
+                                                    item.title && <li key={index}>{item.title}</li>
+                                                }
+                                            </div>
                                         ))}
                                     </ul>
                                     <Button className='w-full '>

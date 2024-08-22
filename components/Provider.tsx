@@ -16,12 +16,7 @@ export const moduleState = atom({
       modules: [{
           title: "",
           description: "",
-          lesson: [{
-            title: "lesson 1",
-            description: "",
-            videoURl: "",
-            supportingFilesURl: ""
-          }]
+          lesson: []
       }]
   }
   })

@@ -11,6 +11,17 @@ const PreviewBar = () => {
         <h1>Preview</h1>
         <p>title: {module.title}</p>
         <p>description: <div dangerouslySetInnerHTML={{ __html: md.render(module.description) }} /></p>
+        {
+          module.modules.map((item,index)=>(
+            <div key={index}>
+              <p>{item.title}</p>
+              {item.lesson.map((item,index)=>(
+                //@ts-ignore
+                <p key={index}>- {item.title}</p>
+              ))}
+            </div>
+          ))
+        }
     </aside>
   )
 }

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import EasyMDE from 'easymde';
 import 'easymde/dist/easymde.min.css';
 
-const MarkdownEditor = ({ value, onChange, placeholder }: {value:any,onChange:any, placeholder: any}) => {
+const MarkdownEditor = ({ value, onChange, placeholder }:{value:any,onChange:any, placeholder: any}) => {
     const editorRef = useRef(null);
     const textareaRef = useRef(null);
 
@@ -20,7 +20,10 @@ const MarkdownEditor = ({ value, onChange, placeholder }: {value:any,onChange:an
             //@ts-ignore
             editorRef.current.codemirror.on('change', () => {
                 //@ts-ignore
-                onChange(editorRef.current.value());
+                const newValue = editorRef.current.value();
+                if (newValue !== value) {
+                    onChange(newValue);
+                }
             });
         }
 
@@ -31,7 +34,15 @@ const MarkdownEditor = ({ value, onChange, placeholder }: {value:any,onChange:an
                 editorRef.current = null;
             }
         };
-    }, [value, onChange]);
+    }, []);
+
+    useEffect(() => {
+        //@ts-ignore
+        if (editorRef.current && editorRef.current.value() !== value) {
+            //@ts-ignore
+            editorRef.current.value(value);
+        }
+    }, [value]);
 
     return <textarea ref={textareaRef} id="markdown-editor" placeholder={placeholder}></textarea>;
 };

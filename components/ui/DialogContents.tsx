@@ -1,11 +1,6 @@
 "use client"
-import React, { useState } from 'react'
-import { Input } from './input'
-import { Textarea } from './textarea'
-import { useRecoilState } from 'recoil'
-import { videoState } from '../Provider'
-import DailogPreview from '../DailogPreview'
 import MarkdownEditor from '../MarkdownEditor'
+import { Input } from './input'
 
 const DialogContents = ({title,titleChanges,description,setDescription,video,handleVideoUpload,file,handleFileUpload}: DailogPros) => {
   

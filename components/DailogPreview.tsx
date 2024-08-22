@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DialogContents from "./ui/DialogContents"
 import { useRecoilState } from "recoil";
 import { moduleState, videoState } from "./Provider";
 import MarkdownIt from "markdown-it";
+import { Button } from "./ui/button";
 const md = new MarkdownIt();
-const DailogPreview = ({index}: {index:number}) => {
+const DailogPreview = ({Index}: {Index:number}) => {
   const [video, setVideo] = useState("")
   const [videoBuffer, setVideoBuffer] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -15,9 +16,34 @@ const DailogPreview = ({index}: {index:number}) => {
   const [file,setFile] = useState(null)
   const [module,setModule] = useRecoilState(moduleState)
 
-  function ButtonClick(){
-
+  function ButtonClick(Index:number) {
+    console.log(Index)
+    setModule((prevModule:any) => ({
+      ...prevModule,
+      modules: prevModule.modules.map((module:any, index:number) => {
+        if (index === Index) {
+          console.log(Index)
+          return {
+            ...module,
+            lesson: [
+              ...module.lesson,
+              {
+                title: title,
+                description: description,
+                videoURL: video,
+                supportFile: file
+              }
+            ]
+          };
+        }
+        return module;
+      })
+    }));
   }
+  useEffect(()=>{
+    console.log(module)
+  },[module])
+  
 
   const handleTitleChange = (event: any) =>{
     setTitle(event.target.value)
@@ -59,6 +85,7 @@ const DailogPreview = ({index}: {index:number}) => {
             <h1>Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></h1>
 
         </div>
+        <Button onClick={()=>ButtonClick(Index)} variant="ghost">ADD</Button>
     </div>
     </div>
   )
