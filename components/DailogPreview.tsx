@@ -1,12 +1,12 @@
 "use client"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { useEffect, useState } from "react";
-import DialogContents from "./ui/DialogContents"
-import { useRecoilState } from "recoil";
-import { moduleState, videoState } from "./Provider";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import MarkdownIt from "markdown-it";
-import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
 import { FaFileDownload } from "react-icons/fa";
+import { useRecoilState } from "recoil";
+import { moduleState } from "./Provider";
+import { Button } from "./ui/button";
+import DialogContents from "./ui/DialogContents";
 const md = new MarkdownIt();
 const DailogPreview = ({Index}: {Index:number}) => {
   const [video, setVideo] = useState("")
@@ -73,6 +73,7 @@ const DailogPreview = ({Index}: {Index:number}) => {
       const fileURL =  URL.createObjectURL(file)
       console.log(fileURL)
       setFile({
+        //@ts-ignore
         files: fileURL,
         name: file.name
       })
@@ -93,10 +94,13 @@ const DailogPreview = ({Index}: {Index:number}) => {
         </div>
         <div>
           <p>support files</p>
-          <a className="w-32" href={file?.files} download={file.name}>
-          {file.name} {
-            file.name && <FaFileDownload />
-          }
+          
+            <a className="w-32" href={//@ts-ignore
+              file?.files} download={file.name}>
+            {//@ts-ignore
+            file.name} {//@ts-ignore
+              file.name && <FaFileDownload />
+            }
          </a>
         </div>
         

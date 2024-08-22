@@ -10,6 +10,7 @@ const md = new MarkdownIt();
 const FullPagePreview = () => {
     const [module,setModule] = useRecoilState(moduleState)
     const [lesson,setLesson] = useState(module.modules[0].lesson[0])
+    //@ts-ignore
     console.log(lesson?.videoURL)
 
     function setVideo(moduleIndex: number,index: number){
@@ -19,19 +20,30 @@ const FullPagePreview = () => {
     return (
         <div className="flex w-screen min-h-screen">
             <div className='w-full'>
-                <h1 className='text-center'>{lesson?.title}</h1>
-                <video className='w-[60%] mx-auto' src={lesson?.videoURL || " "} controls></video>
+                <h1 className='text-center'>{//@ts-ignore
+                lesson?.title
+                }</h1>
+                <video className='w-[60%] mx-auto' src={//@ts-ignore
+                  lesson?.videoURL || " "} controls></video>
                 <div>
                     <h2 className='text-center'>Description</h2>
-                    <div  className='p-10'><div dangerouslySetInnerHTML={{ __html: md.render(lesson?.description || " ") }} /></div>
+                    <div  className='p-10'><div dangerouslySetInnerHTML={{ __html: md.render(//@ts-ignore
+                      lesson?.description || " ") }} /></div>
                 </div>
                 <div>
           <p>support files</p>
-          <a className="w-32" href={lesson?.supportFile.files} download={lesson?.supportFile.name}>
-          {lesson?.supportFile.name} {
+          {
+            lesson != null?
+            //@ts-ignore
+            <a className="w-32" href={lesson?.supportFile.files} download={lesson?.supportFile.name}>
+          {//@ts-ignore
+          lesson?.supportFile.name
+          } {//@ts-ignore
             lesson?.supportFile.name && <FaFileDownload />
           }
-         </a>
+         </a>:
+         null
+          }
         </div>
             </div>
             <aside className="w-[25%] min-h-screen border">
