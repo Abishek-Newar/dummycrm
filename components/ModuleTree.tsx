@@ -2,12 +2,13 @@
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import DialogBox from './DialogBox'
-import MarkdownEditor from './MarkdownEditor'
+import dynamic from 'next/dynamic';
 import { moduleState } from './Provider'
 import { Button } from './ui/button'
 import EditableTitle from './ui/EditableTitle'
 import { Input } from './ui/input'
 
+const MarkdownEditor = dynamic(() => import('./MarkdownEditor'), { ssr: false });
 const ModuleTree = () => {
     const [loading, setLoading] = useState(false)
     const [module, setModule] = useRecoilState(moduleState)

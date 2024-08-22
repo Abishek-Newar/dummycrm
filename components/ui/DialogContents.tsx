@@ -1,5 +1,6 @@
 "use client"
-import MarkdownEditor from '../MarkdownEditor'
+import dynamic from 'next/dynamic';
+const MarkdownEditor = dynamic(() => import('../MarkdownEditor'), { ssr: false });
 import { Input } from './input'
 
 const DialogContents = ({title,titleChanges,description,setDescription,video,handleVideoUpload,file,handleFileUpload}: DailogPros) => {
