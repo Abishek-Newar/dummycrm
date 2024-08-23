@@ -12,7 +12,7 @@ const EditableDialogBox = ({Mindex,Index,title}: {Mindex:number,Index:number,tit
     return (
         <div >
             <Dialog>
-                <DialogTrigger>{title}</DialogTrigger>
+                <DialogTrigger>- {title}</DialogTrigger>
                 <DialogContent className='w-[80vw]'>
                 <DialogTitle>ADD A LESSON</DialogTitle>
                 <EditableDailogPreview Mindex={Mindex} Index={Index} />

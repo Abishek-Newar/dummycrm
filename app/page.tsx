@@ -8,8 +8,7 @@ export default function Home() {
       <Sidebar />
       <div className="w-full flex flex-col">
         <Topbar />
-        <div className="w-full flex">
-          <ModuleTree />
+        <div className="w-full">
           <PreviewBar />
         </div>
       </div>

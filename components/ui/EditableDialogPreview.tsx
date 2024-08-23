@@ -113,10 +113,11 @@ const EditableDailogPreview = ({Mindex,Index}: {Mindex:number,Index:number}) => 
         }
         <div>
             <h4>Title: {title}</h4>
-            <p className="h-[400px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
+            <p className="h-[300px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
         </div>
         <div>
           <p>support files</p>
+          <div className="h-32 overflow-y-auto">
           {
             file.map((file:any,index:number)=>(
               <a key={index} className="w-32" href={//@ts-ignore
@@ -128,6 +129,7 @@ const EditableDailogPreview = ({Mindex,Index}: {Mindex:number,Index:number}) => 
            </a>
             ))
           }
+          </div>
         </div>
         </div>
         <DialogPrimitive.Close><Button onClick={()=>ButtonClick(Index)} variant="outline">ADD</Button></DialogPrimitive.Close>

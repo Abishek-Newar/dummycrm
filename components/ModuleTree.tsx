@@ -11,12 +11,13 @@ import EditableDailogPreview from './ui/EditableDialogPreview';
 import EditableDialogBox from './EditableDialogBox';
 
 const MarkdownEditor = dynamic(() => import('./MarkdownEditor'), { ssr: false });
-const ModuleTree = () => {
+const ModuleTree = ({title,titleChange}:{title:string,titleChange: (e:any)=>void}) => {
     const [loading, setLoading] = useState(false)
     const [module, setModule] = useRecoilState(moduleState)
-
+    
     async function addModule() {
         setLoading(true)
+
         setModule((prevModule) => ({
             ...prevModule,
             modules: [
@@ -33,6 +34,7 @@ const ModuleTree = () => {
 
     function addTitle(event:any){
         setModule({ ...module, title: event.target.value })
+        titleChange(event)
     }
     useEffect(() => {
         console.log(module)
@@ -50,7 +52,7 @@ const ModuleTree = () => {
                     </div>
                     {
                         loading ?
-                            <h1>LOading...</h1> :
+                            <h1>Loading...</h1> :
                             module.modules.map((item, Mindex) => (
                                 <div key={Mindex} className='flex flex-col items-start border w-full p-7'>
                                     <div className='flex '><div>Module {Mindex + 1} - </div>
@@ -61,7 +63,7 @@ const ModuleTree = () => {
                                             <div key={index}>
                                                 {
                                                     //@ts-ignore
-                                                    <span>- <EditableDialogBox Mindex={Mindex} Index={index} title={item.title} /></span>
+                                                    <EditableDialogBox Mindex={Mindex} Index={index} title={item.title} />
                                                 }
                                             </div>
                                         ))}

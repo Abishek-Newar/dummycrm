@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import { moduleState } from "./Provider";
 import { Button } from "./ui/button";
 import DialogContents from "./ui/DialogContents";
+import { ImCross } from "react-icons/im";
 const md = new MarkdownIt();
 const DailogPreview = ({Index}: {Index:number}) => {
   const [video, setVideo] = useState("")
@@ -93,16 +94,20 @@ const DailogPreview = ({Index}: {Index:number}) => {
           video === ""?
           null
           :
-          <div className='w-full h-auto'>
+          <div className='w-full h-auto flex flex-col'>
+            <div className="flex justify-end">
+                <ImCross onClick={()=>setVideo("")} />
+            </div>
             <video src={video} controls></video>
         </div>
         }
         <div>
             <h4>Title: {title}</h4>
-            <p className="h-[400px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
+            <p className="h-[300px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
         </div>
-        <div>
+        <div >
           <p>support files</p>
+          <div className="h-32 overflow-y-auto">
           {
             file.map((file,index)=>(
               <a key={index} className="w-32" href={//@ts-ignore
@@ -114,6 +119,7 @@ const DailogPreview = ({Index}: {Index:number}) => {
            </a>
             ))
           }
+          </div>
         </div>
         
         </div>

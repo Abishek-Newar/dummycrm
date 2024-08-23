@@ -23,8 +23,13 @@ const FullPagePreview = () => {
                 <h1 className='text-center'>{//@ts-ignore
                 lesson?.title
                 }</h1>
-                <video className='w-[60%] mx-auto' src={//@ts-ignore
-                  lesson?.videoURL || " "} controls></video>
+                {
+                  //@ts-ignore
+                  lesson?.videoURL === "" || lesson === null?
+                  null:
+                  <video className='w-[60%] mx-auto' src={//@ts-ignore
+                    lesson?.videoURL || " "} controls></video>
+                }
                 <div>
                     <h2 className='text-center'>Description</h2>
                     <div  className='p-10'><div dangerouslySetInnerHTML={{ __html: md.render(//@ts-ignore
@@ -35,18 +40,21 @@ const FullPagePreview = () => {
           {
             lesson != null?
             //@ts-ignore
-            <a className="w-32" href={lesson?.supportFile.files} download={lesson?.supportFile.name}>
+            lesson.supportFile.map((item,index)=>(
+              <a key={index} className="w-32" href={item?.files} download={item?.name}>
           {//@ts-ignore
-          lesson?.supportFile.name
+          item?.name
           } {//@ts-ignore
-            lesson?.supportFile.name && <FaFileDownload />
+            item?.name && <FaFileDownload />
           }
-         </a>:
+         </a>
+            ))
+            :
          null
           }
         </div>
             </div>
-            <aside className="w-[25%] min-h-screen border">
+            <aside className="w-[25%] min-h-screen border p-10">
         <h1>Preview</h1>
         <p>title: {module.title}</p>
         {
