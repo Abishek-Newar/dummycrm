@@ -25,7 +25,7 @@ const FullPagePreview = () => {
                 }</h1>
                 {
                   //@ts-ignore
-                  lesson?.videoURL === "" || lesson === null?
+                  lesson?.videoURL === "" || lesson?.videoURL === undefined?
                   null:
                   <video className='w-[60%] mx-auto' src={//@ts-ignore
                     lesson?.videoURL || " "} controls></video>
