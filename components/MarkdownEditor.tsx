@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import EasyMDE from 'easymde';
 import 'easymde/dist/easymde.min.css';
 
-const MarkdownEditor = ({ value, onChange, placeholder }) => {
+const MarkdownEditor = ({ value, onChange, placeholder }:{value:any,onChange:any,placeholder:string}) => {
     const editorRef = useRef(null);
     const textareaRef = useRef(null);
 

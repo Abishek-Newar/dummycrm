@@ -12,16 +12,21 @@ import EditableDialogContents from "./EditableDialogContents";
 const md = new MarkdownIt();
 const EditableDailogPreview = ({Mindex,Index}: {Mindex:number,Index:number}) => {
   const [module,setModule] = useRecoilState(moduleState)
+  //@ts-ignore
   const [video, setVideo] = useState(module.modules[Mindex].lesson[Index].videoURL)
   const [videoBuffer, setVideoBuffer] = useState(null);
   const [loading, setLoading] = useState(false);
+  //@ts-ignore
   const [title,setTitle] = useState(module.modules[Mindex].lesson[Index].title)
+  //@ts-ignore
   const [description,setDescription] = useState(module.modules[Mindex].lesson[Index].description)
+  //@ts-ignore
   const [file,setFile] = useState(module.modules[Mindex].lesson[Index].supportFile)
   
   console.log(video)
   function ButtonClick(Index:number) {
     let tempModule = { ...module };
+    //@ts-ignore
     tempModule.modules = tempModule.modules.map((mod, modIndex) => {
         if (modIndex === Mindex) {
             return {
@@ -29,6 +34,7 @@ const EditableDailogPreview = ({Mindex,Index}: {Mindex:number,Index:number}) => 
                 lesson: mod.lesson.map((les, lesIndex) => {
                     if (lesIndex === Index) {
                         return {
+                            //@ts-ignore
                             ...les,
                             title: title,
                             videoURL: video,
@@ -112,7 +118,7 @@ const EditableDailogPreview = ({Mindex,Index}: {Mindex:number,Index:number}) => 
         <div>
           <p>support files</p>
           {
-            file.map((file,index)=>(
+            file.map((file:any,index:number)=>(
               <a key={index} className="w-32" href={//@ts-ignore
                 file?.files} download={file.name}>
               {//@ts-ignore
