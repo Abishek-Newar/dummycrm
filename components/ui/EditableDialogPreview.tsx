@@ -4,42 +4,47 @@ import MarkdownIt from "markdown-it";
 import { useEffect, useState } from "react";
 import { FaFileDownload } from "react-icons/fa";
 import { useRecoilState } from "recoil";
-import { moduleState } from "./Provider";
-import { Button } from "./ui/button";
-import DialogContents from "./ui/DialogContents";
+import { moduleState } from "../Provider";
+import { Button } from "./button";
+import { ImCross } from "react-icons/im";
+import EditableDialogContents from "./EditableDialogContents";
+
 const md = new MarkdownIt();
-const DailogPreview = ({Index}: {Index:number}) => {
-  const [video, setVideo] = useState("")
+const EditableDailogPreview = ({Mindex,Index}: {Mindex:number,Index:number}) => {
+  const [module,setModule] = useRecoilState(moduleState)
+  const [video, setVideo] = useState(module.modules[Mindex].lesson[Index].videoURL)
   const [videoBuffer, setVideoBuffer] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [title,setTitle] = useState("Chapter")
-  const [description,setDescription] = useState("")
-  const [file,setFile] = useState([])
-  const [module,setModule] = useRecoilState(moduleState)
+  const [title,setTitle] = useState(module.modules[Mindex].lesson[Index].title)
+  const [description,setDescription] = useState(module.modules[Mindex].lesson[Index].description)
+  const [file,setFile] = useState(module.modules[Mindex].lesson[Index].supportFile)
+  
   console.log(video)
   function ButtonClick(Index:number) {
-    console.log(Index)
-    setModule((prevModule:any) => ({
-      ...prevModule,
-      modules: prevModule.modules.map((module:any, index:number) => {
-        if (index === Index) {
-          console.log(Index)
-          return {
-            ...module,
-            lesson: [
-              ...module.lesson,
-              {
-                title: title,
-                description: description,
-                videoURL: video,
-                supportFile: file
-              }
-            ]
-          };
+    let tempModule = { ...module };
+    tempModule.modules = tempModule.modules.map((mod, modIndex) => {
+        if (modIndex === Mindex) {
+            return {
+                ...mod,
+                lesson: mod.lesson.map((les, lesIndex) => {
+                    if (lesIndex === Index) {
+                        return {
+                            ...les,
+                            title: title,
+                            videoURL: video,
+                            description: description,
+                            supportFile: file
+                        };
+                    }
+                    return les;
+                })
+            };
         }
-        return module;
-      })
-    }));
+        return mod;
+    });
+
+    // Set the new state
+    setModule(tempModule);
   }
   useEffect(()=>{
     console.log(module)
@@ -86,14 +91,17 @@ const DailogPreview = ({Index}: {Index:number}) => {
   
   return (
     <div className='min-h-[70vh] min-w-screen flex  '>      
-      <DialogContents title={title} titleChanges={handleTitleChange} description = {description} setDescription={setDescription} video= {video} handleVideoUpload={handleVideoUpload} file={file} handleFileUpload={handleFileUpload}/>
+      <EditableDialogContents title={title} titleChanges={handleTitleChange} description = {description} setDescription={setDescription} video= {video} handleVideoUpload={handleVideoUpload} file={file} handleFileUpload={handleFileUpload}/>
     <div className='min-h-full w-[25%] border flex flex-col justify-between p-3'>
-        <div className="w-full h-full">
+        <div className="w-full ">
         {
           video === ""?
           null
           :
-          <div className='w-full h-auto'>
+          <div className='w-full h-auto flex flex-col'>
+            <div className="flex justify-end">
+                <ImCross onClick={()=>setVideo("")} />
+            </div>
             <video src={video} controls></video>
         </div>
         }
@@ -115,7 +123,6 @@ const DailogPreview = ({Index}: {Index:number}) => {
             ))
           }
         </div>
-        
         </div>
         <DialogPrimitive.Close><Button onClick={()=>ButtonClick(Index)} variant="outline">ADD</Button></DialogPrimitive.Close>
     </div>
@@ -123,4 +130,4 @@ const DailogPreview = ({Index}: {Index:number}) => {
   )
 }
 
-export default DailogPreview
+export default EditableDailogPreview

@@ -7,6 +7,8 @@ import { moduleState } from './Provider'
 import { Button } from './ui/button'
 import EditableTitle from './ui/EditableTitle'
 import { Input } from './ui/input'
+import EditableDailogPreview from './ui/EditableDialogPreview';
+import EditableDialogBox from './EditableDialogBox';
 
 const MarkdownEditor = dynamic(() => import('./MarkdownEditor'), { ssr: false });
 const ModuleTree = () => {
@@ -49,23 +51,23 @@ const ModuleTree = () => {
                     {
                         loading ?
                             <h1>LOading...</h1> :
-                            module.modules.map((item, index) => (
-                                <div key={index} className='flex flex-col items-start border w-full p-7'>
-                                    <div className='flex '><div>Module {index + 1} - </div>
-                                        <EditableTitle index={index} />
+                            module.modules.map((item, Mindex) => (
+                                <div key={Mindex} className='flex flex-col items-start border w-full p-7'>
+                                    <div className='flex '><div>Module {Mindex + 1} - </div>
+                                        <EditableTitle index={Mindex} />
                                     </div>
                                     <ul>
                                         {item.lesson.map((item,index)=>(
                                             <div key={index}>
                                                 {
                                                     //@ts-ignore
-                                                    item.title && <li key={index}>{item.title}</li>
+                                                    <span>- <EditableDialogBox Mindex={Mindex} Index={index} title={item.title} /></span>
                                                 }
                                             </div>
                                         ))}
                                     </ul>
                                     <div className='w-full'>
-                                    <DialogBox index={index} />
+                                    <DialogBox index={Mindex} />
                                     </div>
                                 </div>
                             ))

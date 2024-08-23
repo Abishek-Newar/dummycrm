@@ -18,7 +18,7 @@ const DialogBox = ({index}: {index:number}) => {
         <div >
             <Dialog>
                 <DialogTrigger className='w-full'>
-                    <Button className='w-full'>ADD LESSON</Button>
+                    <div className='w-full h-10 flex justify-center items-center rounded-md text-white font-bold bg-blue-700 hover:bg-blue-900 transition-all ease-linear duration-300'>ADD LESSON</div>
                 </DialogTrigger>
                 
                 <DialogContent className='w-[80vw]'>

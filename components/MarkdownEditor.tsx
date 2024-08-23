@@ -1,10 +1,9 @@
-// components/MarkdownEditor.js
 "use client"
 import { useEffect, useRef } from 'react';
 import EasyMDE from 'easymde';
 import 'easymde/dist/easymde.min.css';
 
-const MarkdownEditor = ({ value, onChange, placeholder }:{value:any,onChange:any, placeholder: any}) => {
+const MarkdownEditor = ({ value, onChange, placeholder }) => {
     const editorRef = useRef(null);
     const textareaRef = useRef(null);
 
@@ -16,6 +15,7 @@ const MarkdownEditor = ({ value, onChange, placeholder }:{value:any,onChange:any
                 initialValue: value,
                 toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "fullscreen"],
                 spellChecker: false,
+                maxHeight: "300px"
             });
             //@ts-ignore
             editorRef.current.codemirror.on('change', () => {
@@ -44,7 +44,14 @@ const MarkdownEditor = ({ value, onChange, placeholder }:{value:any,onChange:any
         }
     }, [value]);
 
-    return <textarea ref={textareaRef}  id="markdown-editor" placeholder={placeholder}></textarea>;
+    return (
+            <textarea
+                ref={textareaRef}
+                id="markdown-editor"
+                placeholder={placeholder}
+                style={{ width: '100%', height: '100%', boxSizing: 'border-box', overflowY: 'auto' }}
+            ></textarea>
+    );
 };
 
 export default MarkdownEditor;
