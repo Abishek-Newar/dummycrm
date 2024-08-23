@@ -44,7 +44,7 @@ const MarkdownEditor = ({ value, onChange, placeholder }:{value:any,onChange:any
         }
     }, [value]);
 
-    return <textarea ref={textareaRef} id="markdown-editor" placeholder={placeholder}></textarea>;
+    return <textarea ref={textareaRef}  id="markdown-editor" placeholder={placeholder}></textarea>;
 };
 
 export default MarkdownEditor;

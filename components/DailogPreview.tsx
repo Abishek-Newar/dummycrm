@@ -14,8 +14,9 @@ const DailogPreview = ({Index}: {Index:number}) => {
   const [loading, setLoading] = useState(false);
   const [title,setTitle] = useState("Chapter")
   const [description,setDescription] = useState("")
-  const [file,setFile] = useState("")
+  const [file,setFile] = useState([])
   const [module,setModule] = useRecoilState(moduleState)
+  console.log(video)
   function ButtonClick(Index:number) {
     console.log(Index)
     setModule((prevModule:any) => ({
@@ -72,11 +73,14 @@ const DailogPreview = ({Index}: {Index:number}) => {
       console.log(file)
       const fileURL =  URL.createObjectURL(file)
       console.log(fileURL)
-      setFile({
-        //@ts-ignore
-        files: fileURL,
-        name: file.name
-      })
+      //@ts-ignore
+      setFile((prevFiles) => [
+        ...prevFiles,
+        {
+            files: fileURL,
+            name: file.name
+        }
+    ]);
     }
   }
   
@@ -85,9 +89,14 @@ const DailogPreview = ({Index}: {Index:number}) => {
       <DialogContents title={title} titleChanges={handleTitleChange} description = {description} setDescription={setDescription} video= {video} handleVideoUpload={handleVideoUpload} file={file} handleFileUpload={handleFileUpload}/>
     <div className='min-h-full w-[25%] border flex flex-col justify-between p-3'>
         <div className="w-full h-full">
-        <div className='w-full h-auto'>
+        {
+          video === ""?
+          null
+          :
+          <div className='w-full h-auto'>
             <video src={video} controls></video>
         </div>
+        }
         <div>
             <h4>Title: {title}</h4>
             <p className="h-[400px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
