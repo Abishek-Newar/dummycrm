@@ -42,7 +42,7 @@ const ModuleTree = ({title,titleChange}:{title:string,titleChange: (e:any)=>void
 
    
     return (
-        <div className='w-full flex flex-col items-center p-10 gap-10'>
+        <div className='w-full flex flex-col items-center overflow-y-auto h-[94vh] p-6 gap-10'>
             {loading ?
                 <h1>Loading...</h1> :
                 <>
@@ -74,7 +74,7 @@ const ModuleTree = ({title,titleChange}:{title:string,titleChange: (e:any)=>void
                                 </div>
                             ))
                     }
-                    <Button onClick={addModule} variant="outline"> + </Button></>
+                    <Button onClick={addModule} variant="outline" className="w-full"> + </Button></>
             }
         </div>
     )

@@ -13,7 +13,7 @@ const PreviewBar = () => {
   const [module,setModule] = useRecoilState(moduleState)
   const [title,setTitle] = useState("")
   return (
-    <div className="w-full flex">
+    <div className="w-full  flex">
           <ModuleTree title={title} titleChange={(e:any)=>setTitle(e.target.value)} />
           <aside className="w-[45%] min-h-screen border p-10">
         <h3 className='text-center'>Preview</h3>
