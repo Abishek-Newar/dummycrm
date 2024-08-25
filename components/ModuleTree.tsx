@@ -42,7 +42,7 @@ const ModuleTree = ({title,titleChange}:{title:string,titleChange: (e:any)=>void
 
    
     return (
-        <div className='w-full flex flex-col items-center overflow-y-auto h-[94vh] p-6 gap-10'>
+        <div className='w-full flex flex-col items-center overflow-y-auto h-[90vh] p-6 gap-10'>
             {loading ?
                 <h1>Loading...</h1> :
                 <>
@@ -54,9 +54,10 @@ const ModuleTree = ({title,titleChange}:{title:string,titleChange: (e:any)=>void
                         loading ?
                             <h1>Loading...</h1> :
                             module.modules.map((item, Mindex) => (
-                                <div key={Mindex} className='flex flex-col items-start border w-full p-7'>
-                                    <div className='flex '><div>Module {Mindex + 1} - </div>
-                                        <EditableTitle index={Mindex} />
+                                <div key={Mindex} className='flex flex-col items-start border w-full gap-4 p-7 rounded-md'>
+                                    <div className='flex items-center gap-6'>
+                                    <div className='flex justify-center items-center rounded-full w-10 h-10 border'>{Mindex + 1}</div>
+                                    <EditableTitle index={Mindex} />
                                     </div>
                                     <ul>
                                         {item.lesson.map((item,index)=>(

@@ -8,8 +8,9 @@ import { FaRegEdit } from 'react-icons/fa';
 
 const EditableTitle = ({ index }: { index: number }) => {
   const [editable, setEditable] = useState(false)
-  const [title, setTitle] = useState("");
+  
   const [module, setModule] = useRecoilState(moduleState)
+  const [title, setTitle] = useState(module.modules[index].title);
   function HandleInputChange(Index: number) {
     setModule((prevModule) => ({
       ...prevModule,
@@ -30,9 +31,9 @@ const EditableTitle = ({ index }: { index: number }) => {
     <div>
       {
         editable ?
-          <div className='flex gap-2'>
-            <Input onChange={(e: any) => { setTitle(e.target.value) }} />
-            <Button onClick={() => HandleInputChange(index)}>Done</Button>
+          <div className='flex items-center gap-2'>
+            <Input className='h-8' value={title} onChange={(e: any) => { setTitle(e.target.value) }} />
+            <Button className='h-8' onClick={() => HandleInputChange(index)}>Done</Button>
           </div>
           :
           <div className='flex gap-2'>

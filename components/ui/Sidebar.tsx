@@ -20,7 +20,7 @@ const Sidebar = () => {
     },]
     
   return (
-    <aside className="w-[15%] min-h-screen border">
+    <aside className="w-[15%] fixed min-h-screen border">
         <Container text="CRM" array={hashing} />
           
     </aside>
@@ -29,7 +29,7 @@ const Sidebar = () => {
 
 function Container({text,array}: {text:string,array: {icon: React.JSX.Element, title: string}[]}){
     return  <div className="flex flex-col p-6">
-    <h1 className="text-center text-blue-300">{text}</h1>
+    <h1 className="text-center text-blue-300 mb-5">{text}</h1>
     {
         array.map((item,index)=>(
             <Button  key={index} variant="ghost" className="flex justify-start gap-3"> {item.icon}{item.title}</Button>

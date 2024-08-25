@@ -17,13 +17,15 @@ const Topbar = () => {
       }
     }
   return (
-    <div className='flex justify-between border px-24 py-2 '>
+    <div className='w-screen fixed'>
+      <div className='flex ml-[15%] h-[8vh]  justify-between border px-24 py-2 '>
       <div className='flex gap-4 '>
         {content.map((item,index)=>(
             <Button key={index} variant="outline">{item}</Button>
         ))}
     </div>
     <Button onClick={clickButton}>Done</Button>
+    </div>
     </div>
   )
 }
