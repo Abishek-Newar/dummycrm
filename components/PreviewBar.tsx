@@ -17,7 +17,7 @@ const PreviewBar = () => {
           <ModuleTree title={title} titleChange={(e:any)=>setTitle(e.target.value)} />
           <aside className="w-[45%] min-h-screen border h-[91vh] p-10 overflow-y-auto">
         <h3 className='text-center'>Preview</h3>
-        <p>title: {title}</p>
+        <p><b>Title</b>: {title}</p>
         {/* <div className='flex'><p>Description</p> <p dangerouslySetInnerHTML={{ __html: md.render(module.description) }} /></div> */}
         {
           module.modules.map((item,index)=>(

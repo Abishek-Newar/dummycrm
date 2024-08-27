@@ -103,18 +103,20 @@ const DailogPreview = ({Index}: {Index:number}) => {
         }
         <div>
             <h4>Title: {title}</h4>
-            <p className="h-[300px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
+            <p className="max-h-[300px] overflow-y-auto">Decription:<div dangerouslySetInnerHTML={{ __html: md.render(description) }} /></p>
         </div>
         <div >
-          <p>support files</p>
-          <div className="h-32 overflow-y-auto">
+          <p className="uppercase">support files</p>
+          <div className="h-32 flex flex-col gap-3 overflow-y-auto">
           {
             file.map((file,index)=>(
-              <a key={index} className="w-32" href={//@ts-ignore
-                file?.files} download={file.name}>
+              <a key={index} className=" flex items-center gap-3 border p-2 w-32 justify-center" href={//@ts-ignore
+                file?.files} download={file.name}> FILE - 
               {//@ts-ignore
-              file.name} {//@ts-ignore
+              index + 1} {//@ts-ignore
                 file.name && <FaFileDownload />
+              } {//@ts-ignore
+                file.name && <ImCross onClick={()=>setVideo("")} />
               }
            </a>
             ))

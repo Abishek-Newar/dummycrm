@@ -7,7 +7,7 @@ const DialogContents = ({title,titleChanges,description,setDescription,video,han
   
   return (
     
-      <div className='w-full border p-10 flex flex-col gap-10'>
+      <div className='w-full max-w-full border p-10 flex flex-col gap-10'>
         <Input placeholder="title" onChange={titleChanges} />
         <MarkdownEditor placeholder='Enter Description' value={description} onChange={setDescription} />
         <label className='border' >
