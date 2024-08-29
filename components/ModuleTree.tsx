@@ -17,7 +17,7 @@ const ModuleTree = ({title,titleChange}:{title:string,titleChange: (e:any)=>void
     
     async function addModule() {
         setLoading(true)
-
+        //@ts-ignore
         setModule((prevModule) => ({
             ...prevModule,
             modules: [
@@ -60,7 +60,9 @@ const ModuleTree = ({title,titleChange}:{title:string,titleChange: (e:any)=>void
                                     <EditableTitle index={Mindex} />
                                     </div>
                                     <ul>
-                                        {item.lesson.map((item,index)=>(
+                                        {
+                                            //@ts-ignore
+                                        item.lesson.map((item,index)=>(
                                             <div key={index}>
                                                 {
                                                     //@ts-ignore

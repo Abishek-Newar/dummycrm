@@ -13,11 +13,7 @@ export const moduleState = atom({
     default: {
       title: "",
       description: "",
-      modules: [{
-          title: "Chapter",
-          description: "",
-          lesson: []
-      }]
+      modules: []
   }
   })
 
